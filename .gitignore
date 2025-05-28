@@ -1,0 +1,10 @@
+.env
+.DS_Store
+__pycache__/
+.pytest_cache
+
+# Generated when 'pip install -e '.[dev]'
+social_network_llm.egg-info/
+
+# test logs
+test_logs*

@@ -1,0 +1,92 @@
+# pyproject.toml
+# ============================================================================
+# Build-system configuration for the *social-network-llm* library
+# ============================================================================
+
+[build-system]
+requires = ["setuptools>=69.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# ---------------------------------------------------------------------------
+# Project metadata  (PEP 621)
+# ---------------------------------------------------------------------------
+[project]
+name = "social-network-llm"
+version = "0.1.0"
+description = "LLM-driven social-network simulation framework"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+readme = "README.md"
+requires-python = ">=3.10"
+
+# ---------------------------------------------------------------------------
+# Runtime dependencies -- **pin versions for resolver sanity**
+# ---------------------------------------------------------------------------
+dependencies = [
+  "pydantic>=2.6,<3.0",
+  "pyyaml>=6.0",
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "tqdm>=4.66",
+  "rich>=13.7",
+  "loguru>=0.7.2",
+  "packaging>=23.2,<25",
+
+  # ── Vector store & embeddings ───────────────────────────────────────────
+  "pinecone>=7.0.1",
+
+  # ── Sentence embeddings (SBERT) ─────────────────────────────────────────
+  "sentence-transformers>=2.7.0",
+
+  # ── Network science ────────────────────────────────────────────────────
+  "networkx>=3.3",
+
+  # ── Visualisation ──────────────────────────────────────────────────────
+  "matplotlib>=3.9",
+
+  # ─── LangChain ecosystem (new) ──────────────────────────────────────
+  "langchain-core>=0.3.52,<0.4.0",          # satisfies 2.x packages
+  "langgraph==0.4.0",                       # first release on core 0.3
+  "langchain-google-genai==2.1.4",          # built for core 0.3+
+
+  # ─── Gemini SDK (aligned versions) ──────────────────────────────────
+  "openai">="1.82.0",
+  "google-ai-generativelanguage==0.6.18",
+]
+
+# ---------------------------------------------------------------------------
+# Optional / dev extras  (install via  pip install .[dev] )
+# ---------------------------------------------------------------------------
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.3",
+  "black>=24.4",
+  "mypy>=1.9",
+  "mkdocs-material>=9.5",
+]
+
+# ---------------------------------------------------------------------------
+# Package discovery  (src/ layout)
+# ---------------------------------------------------------------------------
+[tool.setuptools]
+packages = [
+  "snllm",
+  "snllm.agents",
+  "snllm.tools",
+  "snllm.simulation",
+  "snllm.utils",
+]
+
+# ---------------------------------------------------------------------------
+# Ruff / Black / MyPy config stubs  (optional)
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I"]
+
+[tool.black]
+line-length = 88
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
